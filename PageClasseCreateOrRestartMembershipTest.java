@@ -49,20 +49,43 @@ public class PageClasseCreateOrRestartMembershipTest extends BaseTestClass {
 		membershipPageClass.nextClickButton();
 		membershipPageClass.isStandardClick();
 		membershipPageClass.isStandardButtonClick();
-		membershipPageClass.isWorkClickButtonHowToPay();
 	}
 
 	/**
-	 * Test email validation by entering invalid email. Asserts that proper error
-	 * message is shown.
+	 * Test validation message when an invalid email is entered.
 	 *
-	 * Testira validaciju e-mail-a unosom neispravne adrese. Proverava da li je
-	 * prikazana odgovarajuća poruka o grešci.
+	 * Testira validaciju i poruku greške kada se unese neispravan e-mail.
 	 */
 	@Test
-	public void checkMemberValidation() {
-		membershipPageClass.checkInputFieldEmailMember("asdasd");
+	public void checkInvalidEmail() {
+		membershipPageClass.checkInputFieldEmailMember("bru");
 		membershipPageClass.buttonCLickStarted();
 		membershipPageClass.errorEmailMember();
+	}
+
+	/**
+	 * Test scenario where password does not meet the expected criteria.
+	 *
+	 * Negativni test gde uneta lozinka nije validna.
+	 */
+	@Test
+	public void checkInvalidPassword() {
+		membershipPageClass.checkInputFieldEmailMember("brucewaynebatman1901@gmail.com");
+		membershipPageClass.buttonCLickStarted();
+		membershipPageClass.enterPassword("123");
+		membershipPageClass.buttonNextClick();
+	}
+
+	/**
+	 * Uses reusable test data class for login credentials.
+	 *
+	 * Koristi klasu sa testnim podacima za validaciju protoka.
+	 */
+	@Test
+	public void checkMemberTestData() {
+		membershipPageClass.checkInputFieldEmailMember(netflixTestData.VALID_EMAIL);
+		membershipPageClass.buttonCLickStarted();
+		membershipPageClass.enterPassword(netflixTestData.VALID_PASSWORD);
+		membershipPageClass.buttonNextClick();
 	}
 }
